@@ -1,0 +1,13 @@
+.idea
+*.py[cod]
+*$py.class
+__pycache__
+.ipynb_checkpoints
+
+.DS_Store
+.DS_Store?
+._*
+
+.~
+*.swp
+*.swo
