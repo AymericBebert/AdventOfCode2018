@@ -10,7 +10,8 @@ def resolve_path(*path):
     return os.path.abspath(os.path.join(_orig_dir, "../", *path))
 
 
-def get_input_path(fn):
+def get_input_content(fn):
     if not fn.endswith(".txt"):
         fn = fn + ".txt"
-    return resolve_path("input", fn)
+    with open(resolve_path("input", fn)) as f:
+        return f.read()

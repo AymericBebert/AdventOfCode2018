@@ -1,28 +1,33 @@
-from advent import get_input_path
+from advent import get_input_content
+
+
+def part1(s: str):
+    a = 0
+    for line in s.splitlines():
+        x = int(line.strip())
+        a += x
+    return a
+
+
+def part2(s: str):
+    a = 0
+    seen = set()
+    passes = 0
+    int_lines = [int(line.strip()) for line in s.splitlines() if line.strip()]
+    while passes < 10000:  # avoid infinite loop just in case
+        passes += 1
+        for x in int_lines:
+            a += x
+            if a in seen:
+                return a
+            seen.add(a)
+
 
 if __name__ == "__main__":
     print("----- Part 1 -----")
-
-    s = 0
-    with open(get_input_path("1")) as f:
-        for line in f.readlines():
-            x = int(line.strip())
-            s += x
-
-    print(s)
+    r1 = part1(get_input_content("1"))
+    print(r1)
 
     print("----- Part 2 -----")
-
-    s = 0
-    seen = set()
-    searching = True
-    while searching:
-        with open(get_input_path("1")) as f:
-            for line in f.readlines():
-                x = int(line.strip())
-                s += x
-                if s in seen:
-                    print(s)
-                    searching = False
-                    break
-                seen.add(s)
+    r2 = part2(get_input_content("1"))
+    print(r2)

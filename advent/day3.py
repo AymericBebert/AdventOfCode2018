@@ -1,19 +1,16 @@
-from advent import get_input_path
+from advent import get_input_content
 
 
-if __name__ == "__main__":
-    print("----- Part 1 -----")
-
+def part1(s: str):
     # format: #123 @ 3,2: 5x4
     data = []
-    with open(get_input_path("3")) as f:
-        for line in f.readlines():
-            i, x = line.split(" @ ")
-            _id = i.strip("#")
-            p, s = x.split(": ")
-            pw, ph = p.split(",")
-            w, h = s.split("x")
-            data.append((int(pw), int(ph), int(w), int(h)))
+    for line in s.splitlines():
+        i, x = line.split(" @ ")
+        _id = i.strip("#")
+        p, s = x.split(": ")
+        pw, ph = p.split(",")
+        w, h = s.split("x")
+        data.append((int(pw), int(ph), int(w), int(h)))
 
     max_w = max(pw + w for (pw, ph, w, h) in data)
     max_h = max(ph + h for (pw, ph, w, h) in data)
@@ -27,20 +24,19 @@ if __name__ == "__main__":
             for j in range(pw+1, pw+w+1):
                 matrix[i][j] += 1
 
-    print(sum(1 if x >= 2 else 0 for line in matrix for x in line))
+    return sum(1 if x >= 2 else 0 for line in matrix for x in line)
 
-    print("----- Part 2 -----")
 
+def part2(s: str):
     # format: #123 @ 3,2: 5x4
     data = []
-    with open(get_input_path("3")) as f:
-        for line in f.readlines():
-            i, x = line.split(" @ ")
-            _id = i.strip("#")
-            p, s = x.split(": ")
-            pw, ph = p.split(",")
-            w, h = s.split("x")
-            data.append((int(_id), int(pw), int(ph), int(w), int(h)))
+    for line in s.splitlines():
+        i, x = line.split(" @ ")
+        _id = i.strip("#")
+        p, s = x.split(": ")
+        pw, ph = p.split(",")
+        w, h = s.split("x")
+        data.append((int(_id), int(pw), int(ph), int(w), int(h)))
 
     max_w = max(pw + w for (_id, pw, ph, w, h) in data)
     max_h = max(ph + h for (_id, pw, ph, w, h) in data)
@@ -64,4 +60,14 @@ if __name__ == "__main__":
 
     for k, v in overlapped.items():
         if not v:
-            print(k)
+            return k
+
+
+if __name__ == "__main__":
+    print("----- Part 1 -----")
+    r1 = part1(get_input_content("3"))
+    print(r1)
+
+    print("----- Part 2 -----")
+    r2 = part2(get_input_content("3"))
+    print(r2)
